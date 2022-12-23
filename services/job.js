@@ -23,21 +23,26 @@ const wishes = [
 	"Happy birthday to somebody we really need a week for to celebrate properly!",
 	"Have a great birthday, and remember to never act your age.",
 ];
+const sent = [];
 
 const sendEmail = async (cronParam) => {
 	// let recipient = "d10a9308-3246-4469-a4de-e6d70b6871e6@email.webhook.site",
-	let recipient = "otagera@gmail.com",
+	const random = Math.floor(Math.random() * wishes.length);
+	const quote = wishes.splice(random, 1);
+	sent.push(quote);
+	let recipient = "kufreokon24@gmail.com",
 		subject = "Email From Cron Job",
 		message = "This is a message from Cron job";
-	message += "<br/>" + JSON.stringify(cronParam);
+	message += "<br/>" + quote;
 	await mailService.send(recipient, subject, message);
 };
 
 module.exports = {
 	triggerEveryHour: () => {
 		// Every hour, on day 23 of the month, only in December
-		cron.schedule("0 * 23 12 *", function (cronParam) {
+		cron.schedule("30 * 24 12 *", function (cronParam) {
 			sendEmail(cronParam);
+			console.log(cronParam);
 		});
 	},
 };
