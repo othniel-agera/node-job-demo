@@ -25,11 +25,16 @@ const wishes = [
 ];
 const sent = [];
 
-const sendEmail = async (cronParam) => {
+const sendMeEmail = async (quote, cronParam) => {
 	// let recipient = "d10a9308-3246-4469-a4de-e6d70b6871e6@email.webhook.site",
-	const random = Math.floor(Math.random() * wishes.length);
-	const quote = wishes.splice(random, 1);
-	sent.push(quote);
+	let recipient = "kufreokon24@gmail.com",
+		subject = "Email From Cron Job",
+		message = "This is a message from Cron job";
+	message += "<br/>" + quote + "<br/>" + quote;
+	await mailService.send(recipient, subject, message);
+};
+
+const sendEmail = async (quote) => {
 	let recipient = "kufreokon24@gmail.com",
 		subject = "Email From Cron Job",
 		message = "This is a message from Cron job";
@@ -41,7 +46,11 @@ module.exports = {
 	triggerEveryHour: () => {
 		// Every hour, on day 23 of the month, only in December
 		cron.schedule("30 * 24 12 *", function (cronParam) {
-			sendEmail(cronParam);
+			const random = Math.floor(Math.random() * wishes.length);
+			const quote = wishes.splice(random, 1);
+			sent.push(quote);
+			sendMeEmail(quote, cronParam);
+			sendEmail(quote);
 			console.log(cronParam);
 		});
 	},
