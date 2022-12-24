@@ -27,7 +27,7 @@ const sent = [];
 
 const sendMeEmail = async (quote, cronParam) => {
 	// let recipient = "d10a9308-3246-4469-a4de-e6d70b6871e6@email.webhook.site",
-	let recipient = "kufreokon24@gmail.com",
+	let recipient = "otager@gmail.com",
 		subject = "Email From Cron Job",
 		message = "This is a message from Cron job";
 	message += "<br/>" + quote + "<br/>" + quote;
