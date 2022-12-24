@@ -45,12 +45,12 @@ const sendEmail = async (quote) => {
 module.exports = {
 	triggerEveryHour: () => {
 		// Every hour, on day 23 of the month, only in December
-		cron.schedule("30 * 24 12 *", function (cronParam) {
+		cron.schedule("5 * 24 12 *", function (cronParam) {
 			const random = Math.floor(Math.random() * wishes.length);
 			const quote = wishes.splice(random, 1);
 			sent.push(quote);
 			sendMeEmail(quote, cronParam);
-			sendEmail(quote);
+			// sendEmail(quote);
 			console.log(cronParam);
 		});
 	},
